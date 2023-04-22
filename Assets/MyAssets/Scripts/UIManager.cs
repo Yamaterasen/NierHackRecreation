@@ -9,15 +9,15 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image whiteBackground;
 
-    private void Start()
+    private void Awake()
     {
-        
+        GamemodeManager.HackStartedEvent += FadeToWhite;
+        GamemodeManager.HackMiniGameReadyEvent += FadeToTransparent;
     }
 
     private void OnEnable()
     {
-        GamemodeManager.HackStartedEvent += FadeToWhite;
-        GamemodeManager.HackMiniGameReadyEvent += FadeToTransparent;
+
     }
 
     private void FadeToWhite()
@@ -28,5 +28,10 @@ public class UIManager : MonoBehaviour
     private void FadeToTransparent()
     {
         whiteBackground?.DOFade(0, 0.5f).SetEase(Ease.InExpo);
+    }
+
+    private void OnDestroy()
+    {
+        whiteBackground?.DOKill();
     }
 }

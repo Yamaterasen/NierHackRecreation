@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-4454276303192340008
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 612fbe761fc669145ba946120a543c47
+  m_EffectName: Attenuation
+  m_MixLevel: 551f37aa320fdc349b51b6644f750478
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &-4278931489026999595
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 3rdPerson
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 4a81dbe527e5fa348931b14d8c44638c
+  m_Children: []
+  m_Volume: 398dc9680481c424f9bd2f8ea4e09ddd
+  m_Pitch: 18124948fd6be0d4e80a210daf04137b
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -4454276303192340008}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MyMixer
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  - {fileID: 5227596499244983861}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: 398dc9680481c424f9bd2f8ea4e09ddd
+    name: Volume1
+  - guid: db84c3576fa19bb48a3e6babe2ff24d7
+    name: Volume2
+  m_AudioMixerGroupViews:
+  - guids:
+    - f935a91d577593445be8a6a0cac2bf9f
+    - 4a81dbe527e5fa348931b14d8c44638c
+    - 9c2e235cc8cc6d5409d37592f67f8ae0
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: f935a91d577593445be8a6a0cac2bf9f
+  m_Children:
+  - {fileID: -4278931489026999595}
+  - {fileID: 2401594048087474459}
+  m_Volume: 289a1d04345b42643b381bd64554b60c
+  m_Pitch: e22fbb45cb5dde74c8158c39d1c9a4d0
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 698159c148746e24d845832a4e1f291c
+  m_EffectName: Attenuation
+  m_MixLevel: 8ed6b7df54b7a85448967efe8e122d63
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Petrichor
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: a78751f37d575c64f8f76c91be4fa7a5
+  m_FloatValues:
+    db84c3576fa19bb48a3e6babe2ff24d7: -80
+    398dc9680481c424f9bd2f8ea4e09ddd: -0.025776558
+  m_TransitionOverrides: {}
+--- !u!244 &1916313466718777100
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 37da31c5f3f355448a931c7414629644
+  m_EffectName: Attenuation
+  m_MixLevel: 75db3a3378f6f6b408cef8c34d4ff727
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &2401594048087474459
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Hacking
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 9c2e235cc8cc6d5409d37592f67f8ae0
+  m_Children: []
+  m_Volume: db84c3576fa19bb48a3e6babe2ff24d7
+  m_Pitch: cf77296c0c298074d887f8ac992e9935
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 1916313466718777100}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!245 &5227596499244983861
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Petrichor 8-Bit
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: af3fa5423ee34a34085966766fa230a5
+  m_FloatValues:
+    398dc9680481c424f9bd2f8ea4e09ddd: -80
+  m_TransitionOverrides: {}
