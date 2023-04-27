@@ -6,6 +6,17 @@ using Cinemachine;
 
 public class PlayerShipController : MonoBehaviour
 {
+    [Header("Player Bullets")]
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Transform bulletSpawn;
+    [SerializeField] private AudioClip shotSound;
+    private GameObject newBullet;
+    [SerializeField] private float fireRate = 0.5F;
+    private float nextFire = 0.5F;
+    private float myTime = 0.0F;
+    private bool isShooting;
+
+    [Header("Player Movement")]
     [SerializeField] private float speed = 3;
     [SerializeField] private Camera topDownCam;
     private Rigidbody shipRigidbody;
@@ -13,19 +24,41 @@ public class PlayerShipController : MonoBehaviour
     private Vector2 mouseLook;
     private Vector3 rotationTarget;
 
+    [Header("Player Movement")]
+    [SerializeField] private ParticleSystem shootParticleSystem;
+    [SerializeField] private ParticleSystem trailParticleSystem;
+    private ParticleSystem.EmissionModule shootEmission;
+    private ParticleSystem.EmissionModule trailEmission;
+
+    private LayerMask groundLayer;
+
+    private AudioSource audioSource;
     private void Awake()
     {
+        shootEmission = shootParticleSystem.emission;
+        trailEmission = trailParticleSystem.emission;
         shipRigidbody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+        groundLayer = LayerMask.GetMask("Ground");
     }
 
     private void OnEnable()
     {
         Cursor.lockState = CursorLockMode.None;
+        shootParticleSystem.Play();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
+        if (context.started)
+        {
+            trailEmission.enabled = true;
+        }
+        if (context.canceled)
+        {
+            trailEmission.enabled = false;
+        }
     }
 
     public void OnMouseLook(InputAction.CallbackContext context)
@@ -33,11 +66,25 @@ public class PlayerShipController : MonoBehaviour
         mouseLook = context.ReadValue<Vector2>();
     }
 
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            isShooting = true;
+        }
+        if(context.canceled)
+        {
+            isShooting = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         MovePlayer();
 
         RotatePlayer();
+
+        PlayerShooting();
     }
     private void MovePlayer()
     {
@@ -47,15 +94,9 @@ public class PlayerShipController : MonoBehaviour
 
     private void RotatePlayer()
     {
-        //Vector2 rbPosition = new Vector2(shipRigidbody.position.x, shipRigidbody.position.z);
-        //Vector2 aimDirection = mouseLook - rbPosition;
-        //float angleValue = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        //Quaternion angleQuaternion = Quaternion.Euler(0, angleValue, 0);
-        //shipRigidbody.MoveRotation(angleQuaternion);
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(mouseLook);
-        if(Physics.Raycast(ray, out hit))
+        if(Physics.Raycast(ray, out hit, 50f, groundLayer))
         {
             rotationTarget = hit.point;
         }
@@ -67,9 +108,27 @@ public class PlayerShipController : MonoBehaviour
 
         if(aimDirection != Vector3.zero)
         {
-            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, .5f);
             shipRigidbody.MoveRotation(rotation);
         }
     }
 
+    private void PlayerShooting()
+    {
+        myTime = myTime + Time.deltaTime;
+
+        if (isShooting && myTime > nextFire)
+        {
+            nextFire = myTime + fireRate;
+            newBullet = ObjectPool.SharedInstance.GetPooledObject();
+            audioSource.PlayOneShot(shotSound, 1f);
+            if (bullet != null)
+            {
+                newBullet.transform.position = bulletSpawn.transform.position;
+                newBullet.transform.rotation = bulletSpawn.transform.rotation;
+                newBullet.SetActive(true);
+            }
+            nextFire = nextFire - myTime;
+            myTime = 0.0F;
+        }
+    }
 }

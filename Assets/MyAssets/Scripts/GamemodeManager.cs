@@ -12,10 +12,16 @@ public class GamemodeManager : MonoBehaviour
     public static event HackStarted HackStartedEvent;
     public delegate void HackMiniGameReady();
     public static event HackMiniGameReady HackMiniGameReadyEvent;
+
+    [Header("Player Inputs")]
     [SerializeField] private PlayerInput playerThirdPersonInput;
     [SerializeField] private PlayerInput shipPlayerInput;
-    [SerializeField] private AudioMixer audioMixer;
 
+    [Header("Audio")]
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioClip startHackSound;
+    [SerializeField] private AudioClip endHackSound;
+    private AudioSource audioSource;
 
 
     private void Awake()
@@ -26,7 +32,7 @@ public class GamemodeManager : MonoBehaviour
 
     private void Start()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnHackBegin()
@@ -37,6 +43,7 @@ public class GamemodeManager : MonoBehaviour
     private IEnumerator DelayGamemodeTransition()
     {
         HackStartedEvent?.Invoke();
+        audioSource.PlayOneShot(startHackSound, 1f);
         StartCoroutine(FadeMixerGroup.StartFade(audioMixer, "Volume1", 1f, 0f));
         StartCoroutine(FadeMixerGroup.StartFade(audioMixer, "Volume2", 1f, 1f));
         //Delay before running OnHackMiniGameReady
