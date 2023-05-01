@@ -24,6 +24,7 @@ public class GamemodeManager : MonoBehaviour
     private AudioSource audioSource;
 
     [SerializeField] private GameObject enemy;
+    [SerializeField] private GameObject enemy2;
 
 
     private void Awake()
@@ -60,6 +61,7 @@ public class GamemodeManager : MonoBehaviour
         playerThirdPersonInput.enabled = false;
         shipPlayerInput.gameObject.SetActive(true);
         enemy.SetActive(true);
+        enemy2.SetActive(true);
         shipPlayerInput.ActivateInput();
         shipPlayerInput.SwitchCurrentActionMap("PlayerShip");
     }

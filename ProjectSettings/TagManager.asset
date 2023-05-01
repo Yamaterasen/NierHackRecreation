@@ -8,6 +8,7 @@ TagManager:
   - PlayerEyes
   - Enemy
   - PlayerProjectile
+  - OrangeEnemyProjectile
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Ground
   - Post Processing
   - Player
-  - 
-  - 
+  - Enemy
+  - EnemyProjectile
   - 
   - 
   - 

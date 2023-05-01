@@ -30,6 +30,11 @@ public class PlayerShipController : MonoBehaviour
     private ParticleSystem.EmissionModule shootEmission;
     private ParticleSystem.EmissionModule trailEmission;
 
+    [Header("Health")]
+    [SerializeField] private GameObject LeftShipGeo;
+    [SerializeField] private GameObject RightShipGeo;
+    [SerializeField] private int playerHealth = 3;
+
     public static PlayerShipController instance;
     private LayerMask groundLayer;
 
@@ -133,6 +138,27 @@ public class PlayerShipController : MonoBehaviour
             }
             nextFire = nextFire - myTime;
             myTime = 0.0F;
+        }
+    }
+
+    public void TakeDamage()
+    {
+        playerHealth--;
+        switch (playerHealth)
+        {
+            case 2:
+                LeftShipGeo.SetActive(false);
+                break;
+            case 1:
+                RightShipGeo.SetActive(false);
+                break;
+            default:
+                break;
+        }
+        if (playerHealth <= 0)
+        {
+            //canMove = false;
+            //PlayDeathAnimation();
         }
     }
 }
