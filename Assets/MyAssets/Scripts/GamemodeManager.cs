@@ -23,6 +23,8 @@ public class GamemodeManager : MonoBehaviour
     [SerializeField] private AudioClip endHackSound;
     private AudioSource audioSource;
 
+    [SerializeField] private GameObject enemy;
+
 
     private void Awake()
     {
@@ -57,6 +59,7 @@ public class GamemodeManager : MonoBehaviour
         RenderSettings.fog = false;
         playerThirdPersonInput.enabled = false;
         shipPlayerInput.gameObject.SetActive(true);
+        enemy.SetActive(true);
         shipPlayerInput.ActivateInput();
         shipPlayerInput.SwitchCurrentActionMap("PlayerShip");
     }

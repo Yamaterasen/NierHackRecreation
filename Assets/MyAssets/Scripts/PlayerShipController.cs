@@ -30,11 +30,15 @@ public class PlayerShipController : MonoBehaviour
     private ParticleSystem.EmissionModule shootEmission;
     private ParticleSystem.EmissionModule trailEmission;
 
+    public static PlayerShipController instance;
     private LayerMask groundLayer;
 
     private AudioSource audioSource;
     private void Awake()
     {
+        //Singleton instance
+        instance = this;
+
         shootEmission = shootParticleSystem.emission;
         trailEmission = trailParticleSystem.emission;
         shipRigidbody = GetComponent<Rigidbody>();
@@ -119,7 +123,7 @@ public class PlayerShipController : MonoBehaviour
         if (isShooting && myTime > nextFire)
         {
             nextFire = myTime + fireRate;
-            newBullet = ObjectPool.SharedInstance.GetPooledObject();
+            newBullet = ObjectPool.SharedInstance.GetPooledObject("PlayerProjectile");
             audioSource.PlayOneShot(shotSound, 1f);
             if (bullet != null)
             {

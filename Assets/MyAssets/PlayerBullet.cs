@@ -7,7 +7,7 @@ public class PlayerBullet : MonoBehaviour
 
     [SerializeField] private float bulletSpeed;
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position += transform.forward * Time.deltaTime * bulletSpeed;
     }
